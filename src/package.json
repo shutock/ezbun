@@ -3,6 +3,14 @@
   "description": "Make run bund sandboxes easy",
   "author": "Denis Sh. <yo@shutock.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shutock/ezbun.git"
+  },
+  "homepage": "https://ezbun.vercel.app",
+  "bugs": {
+    "url": "https://github.com/shutock/ezbun/issues"
+  },
   "keywords": [
     "bun",
     "sandbox"
