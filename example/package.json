@@ -1,0 +1,16 @@
+{
+  "name": "example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "ezbun --watch",
+    "start": "ezbun"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "ezbun": "*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

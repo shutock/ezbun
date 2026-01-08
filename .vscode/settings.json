@@ -1,0 +1,25 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.indentSize": 2,
+
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.prettierrc": true,
+    "**/.gitignore": true,
+    "**/.npmrc": true,
+    "**/.turbo": true,
+    "**/.next": true,
+    "**/postcss.config.*": true,
+    "**/drizzle.config.*": true,
+    "**/eslint.config.*": true,
+    "**/source.config.*": true,
+    "**/next.config.*": true,
+    "**/tsconfig*": true,
+    "**/next-env.d.ts": true,
+    "**/bun.lock": true,
+    "**/instrumentation.ts": true
+  },
+
+  "tailwindCSS.classFunctions": ["cn", "cva"],
+  "cSpell.words": ["Ezbun", "ianvs", "vaul"]
+}

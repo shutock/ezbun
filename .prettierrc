@@ -1,0 +1,34 @@
+{
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindFunctions": ["cn", "cva"],
+  "importOrderParserPlugins": [
+    "typescript",
+    "jsx",
+    "explicitResourceManagement"
+  ],
+  "importOrder": [
+    "<TYPES>",
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@repo/",
+    "<TYPES>^~",
+    "^~/",
+    "",
+    "<TYPES>^[..]",
+    "^[../]",
+    "^[./]",
+    "",
+    "^.*\\.css$"
+  ],
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": { "printWidth": 1000 }
+    }
+  ]
+}

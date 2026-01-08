@@ -1,0 +1,29 @@
+{
+  "name": "ezbun",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "*": "./config.ts"
+  },
+  "bin": "./cli.ts",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@config/eslint": "*",
+    "@config/typescript": "*",
+    "@types/bun": "^1.3.5",
+    "@types/node": "^22.15.3",
+    "@types/prompts": "^2.4.9",
+    "eslint": "^9.39.1",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "zod": "^4.3.5"
+  },
+  "peerDependencies": {
+    "bun": "^1.3.5"
+  }
+}
