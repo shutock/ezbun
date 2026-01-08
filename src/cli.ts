@@ -1,15 +1,14 @@
+#!/usr/bin/env bun
 import prompts from "prompts";
 
-import { loadConfig } from "./config";
+import { loadConfig } from "./utils/config";
 
 export const run = async () => {
   const config = await loadConfig();
 
-  // Parse args
   const args = process.argv.slice(2);
   const isWatch = args.includes("--watch");
 
-  // Glob files
   const extPattern = `*.{${config.extensions.join(",")}}`;
   const glob = new Bun.Glob(extPattern);
   const scripts: string[] = [];
@@ -59,11 +58,8 @@ export const run = async () => {
 
   const selectedScript = response.script;
 
-  // Preload script path
   const preloadPath = `${import.meta.dir}/preload.ts`;
 
-  // Construct command
-  // bun --bun [--watch] --preload ... script ...args
   const cmd = [
     "bun",
     "--bun",

@@ -37,9 +37,11 @@
       "name": "docs",
       "version": "0.1.0",
       "dependencies": {
+        "ezbun": "*",
         "next": "16.1.0",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
+        "zod": "^4.3.5",
       },
       "devDependencies": {
         "@config/eslint": "*",
@@ -53,6 +55,9 @@
     },
     "example": {
       "name": "example",
+      "dependencies": {
+        "zod": "^4.3.5",
+      },
       "devDependencies": {
         "@types/bun": "latest",
         "ezbun": "*",
