@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: var(--color-neutral-900);
+  --color-ink: var(--color-neutral-100);
+
+  --font-sans: var(--font-geist-sans, "Geist"), sans-serif;
+  --font-mono: var(--font-geist-mono, "Geist Mono"), monospace;
+
+  --animate-blink: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer components {
+  :root {
+    --code-foreground: var(--color-ink);
+    --code-background: transparent;
+    --code-token-constant: var(--color-sky-200);
+    --code-token-string: color-mix(in oklch, var(--color-ink) 80%, transparent);
+    --code-token-comment: color-mix(in oklch, var(--color-ink) 40%, transparent);
+    --code-token-keyword: var(--color-red-400);
+    --code-token-parameter: var(--color-teal-400);
+    --code-token-function: var(--color-orange-300);
+    --code-token-string-expression: var(--color-emerald-400);
+    --code-token-punctuation: color-mix(in oklch, var(--color-ink) 40%, transparent);
+    --code-token-link: var(--color-pink-400);
+  }
+}
+
+@utility row {
+  @apply flex flex-row;
+}
+
+@utility row-reverse {
+  @apply flex flex-row-reverse;
+}
+
+@utility col {
+  @apply flex flex-col;
+}
+
+@utility col-reverse {
+  @apply flex flex-col-reverse;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@utility shimmer {
+  background-size: 150%;
+  background-image: linear-gradient(125deg, var(--tw-gradient-from, transparent) 25%, var(--tw-gradient-to) 50%, var(--tw-gradient-from, transparent) 65%);
+  animation: shimmer var(--tw-duration, 4s) infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -180% 0;
+  }
+}

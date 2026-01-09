@@ -1,22 +1,22 @@
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.indentSize": 2,
+// {
+//   "editor.defaultFormatter": "esbenp.prettier-vscode",
+//   "editor.indentSize": 2,
 
-  "files.exclude": {
-    "**/node_modules": true,
-    "**/.prettierrc": true,
-    "**/.gitignore": true,
-    "**/.npmrc": true,
-    "**/.turbo": true,
-    "**/.next": true,
-    "**/postcss.config.*": true,
-    "**/eslint.config.*": true,
-    "**/next.config.*": true,
-    "**/tsconfig*": true,
-    "**/next-env.d.ts": true,
-    "**/bun.lock": true
-  },
+//   "files.exclude": {
+//     "**/node_modules": true,
+//     "**/.prettierrc": true,
+//     "**/.gitignore": true,
+//     "**/.npmrc": true,
+//     "**/.turbo": true,
+//     "**/.next": true,
+//     "**/postcss.config.*": true,
+//     "**/eslint.config.*": true,
+//     "**/next.config.*": true,
+//     "**/tsconfig*": true,
+//     "**/next-env.d.ts": true,
+//     "**/bun.lock": true
+//   },
 
-  "tailwindCSS.classFunctions": ["cn", "cva"],
-  "cSpell.words": ["Ezbun", "ianvs", "vaul"]
-}
+//   "tailwindCSS.classFunctions": ["cn", "cva"],
+//   "cSpell.words": ["Ezbun", "ianvs", "vaul"]
+// }
