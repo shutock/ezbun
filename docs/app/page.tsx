@@ -23,6 +23,35 @@ export const metadata: Metadata = {
   title: "ezBun — easy Bun sandboxes",
   description:
     "Make running Bun sandboxes easy. ezbun is a CLI tool that scans your project for scripts and provides an interactive menu to run them. It also includes built-in environment variable validation and type generation.",
+  openGraph: {
+    title: "ezBun — easy Bun sandboxes",
+    description:
+      "Make running Bun sandboxes easy. ezbun is a CLI tool that scans your project for scripts and provides an interactive menu to run them. It also includes built-in environment variable validation and type generation.",
+    type: "website",
+    url: "https://ezbun.vercel.app",
+    siteName: "ezBun",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ezBun — easy Bun sandboxes",
+    description:
+      "Make running Bun sandboxes easy. ezbun is a CLI tool that scans your project for scripts and provides an interactive menu to run them. It also includes built-in environment variable validation and type generation.",
+    creator: "@shutock",
+  },
+  keywords: [
+    "bun",
+    "sandbox",
+    "cli",
+    "scripts",
+    "typescript",
+    "validation",
+    "zod",
+    "env",
+    "environment variables",
+  ],
+  authors: [{ name: "Denis Sh.", url: "https://github.com/shutock" }],
+  creator: "Denis Sh.",
+  metadataBase: new URL("https://ezbun.vercel.app"),
 };
 
 type Props = PageProps<"/">;
