@@ -18,12 +18,25 @@ bun add -D ezbun
 
 ## Usage
 
-Add a script to your `package.json`:
+Without direct installation with `bunx`:
+
+```bash
+bunx ezbun
+```
+
+Installed into your project:
+
+```bash
+bun ezbun
+```
+
+Tip. you can add a script to your `package.json`:
 
 ```json
 {
   "scripts": {
-    "dev": "ezbun"
+    "dev": "ezbun --watch", // with hot reloading
+    "start": "ezbun"
   }
 }
 ```
@@ -34,23 +47,17 @@ Then run:
 bun dev
 ```
 
-Or run directly with `bunx`:
-
-```bash
-bunx ezbun
-```
-
 ### Watch Mode
 
-You can run scripts in watch mode by passing the `--watch` flag:
+You can run scripts in watch mode (hot reloading) by passing the `--watch` flag:
 
 ```bash
-bun dev --watch
+bun ezbun --watch
 ```
 
 ## Configuration
 
-Create a `ezbun.config.ts` file in your project root to customize behavior:
+Create an optional `ezbun.config.ts` file in your project root to customize behavior:
 
 ```ts
 import { defineConfig } from "ezbun";
@@ -86,13 +93,13 @@ export default defineEnv({
 2. When you run a script via `ezbun`, it will:
    - Validate `process.env` against your schema.
    - Print helpful error messages if validation fails.
-   - Automatically generate/update `env.d.ts` for global type definitions.
+   - Automatically generate `env.d.ts` for global type definitions.
 
 Now you can use `process.env` with full type safety in your code!
 
 ```ts
-// src/index.ts
-console.log(process.env.PORT); // typed as number
+/** typed as `string` not `string | undefined` */
+console.log(process.env.API_KEY);
 ```
 
 ## License
