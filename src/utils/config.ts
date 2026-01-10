@@ -1,13 +1,3 @@
-import { z } from "zod";
-
-const schema = z.object({
-  sourceDir: z.string().default("./src"),
-  extensions: z
-    .array(z.string())
-    .default(["ts", "tsx", "js", "jsx", "cjs", "mjs"]),
-  showSuccessMessage: z.boolean().default(false),
-});
-
 export type Config = {
   /** Source directory
    * @default "./src"
@@ -27,17 +17,23 @@ export const loadConfig = async () => {
   const configPath = `${process.cwd()}/ezbun.config.ts`;
   const configFile = Bun.file(configPath);
 
+  let parsed: Partial<Config> = {};
+
   if (await configFile.exists()) {
     try {
       const configModule = await import(configPath);
-      return schema.parse(configModule.default || {});
+      parsed = configModule.default || {};
     } catch (error) {
       console.error("Error loading ezbun.config.ts:", error);
       throw error;
     }
   }
 
-  return schema.parse({});
+  return {
+    sourceDir: parsed.sourceDir ?? "./src",
+    extensions: parsed.extensions ?? ["ts", "tsx", "js", "jsx", "cjs", "mjs"],
+    showSuccessMessage: parsed.showSuccessMessage ?? false,
+  };
 };
 
 export const defineConfig = (config: Config) => config;

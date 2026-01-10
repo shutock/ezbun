@@ -1,18 +1,18 @@
-import z from "zod";
+import type { ZodObject, ZodRawShape } from "zod";
+import { z } from "zod/mini";
 
 import { loadConfig } from "./config";
 import { bold, green, icon, red } from "./console";
 
 export { z };
 
-export const defineEnv = <T extends z.ZodRawShape>(schema: T) =>
-  z.object(schema);
+export const defineEnv = <T extends ZodRawShape>(schema: T) => z.object(schema);
 
 export const loadUserEnv = async () => {
   try {
     const schemaPath = `${process.cwd()}/env.schema.ts`;
     const module = await import(schemaPath);
-    return module.default as z.ZodObject;
+    return module.default as ZodObject;
   } catch {
     return null;
   }
