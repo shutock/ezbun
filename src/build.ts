@@ -1,7 +1,7 @@
 await Bun.$`rm -rf ./dist`;
 
 const result = await Bun.build({
-  entrypoints: ["./index.ts", "./cli.ts"],
+  entrypoints: ["./index.ts", "./cli.ts", "./preload.ts"],
   outdir: "./dist",
   target: "bun",
   minify: true,

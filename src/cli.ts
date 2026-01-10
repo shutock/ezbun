@@ -58,7 +58,8 @@ export const run = async () => {
 
   const selectedScript = response.script;
 
-  const preloadPath = `${import.meta.dir}/preload.ts`;
+  const isTs = import.meta.url.endsWith(".ts");
+  const preloadPath = `${import.meta.dir}/preload.${isTs ? "ts" : "js"}`;
 
   const cmd = [
     "bun",
