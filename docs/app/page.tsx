@@ -102,7 +102,7 @@ export default (() => {
 
         <Container
           className={cn(
-            "row leading-none font-medium",
+            "row flex-wrap leading-none font-medium",
             "*:rounded-full *:p-3 *:px-6 *:transition *:active:scale-95",
           )}
         >
@@ -122,6 +122,17 @@ export default (() => {
             }}
           >
             Github
+          </Link>
+
+          <Link
+            className="bg-ink/5 text-ink"
+            {...{
+              href: "https://npmjs.com/package/ezbun",
+              target: "_blank",
+              rel: "noopener noreferrer",
+            }}
+          >
+            NPM
           </Link>
         </Container>
       </Section>
