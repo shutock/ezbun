@@ -155,7 +155,11 @@ export default (() => {
 
       <Section id="installation">
         <H2>Installation</H2>
-        <CodeBlock {...{ lang: "bash" }}>bun add -D ezbun</CodeBlock>
+        <CodeBlock {...{ lang: "bash" }}>bun add -D ezbun zod</CodeBlock>
+        <P className="text-ink/70 text-sm">
+          Note: <Code>zod</Code> is a peer dependency and must be installed
+          separately.
+        </P>
       </Section>
 
       <Section>
@@ -192,6 +196,45 @@ export default (() => {
         </Container>
 
         <Container>
+          <H3>CLI Options</H3>
+          <P>Customize behavior with command-line flags:</P>
+          <CodeBlock {...{ lang: "bash", fileName: "examples" }}>
+            {`
+# Default usage - scans ./src for ts, tsx, js, jsx, cjs, mjs files
+ezbun
+
+# Custom directory
+ezbun --dir ./scripts
+
+# Custom file extensions
+ezbun --extensions js,ts
+
+# Combined options
+ezbun --dir ./src --extensions ts,tsx,js
+
+# Watch mode (hot reloading)
+ezbun --watch
+
+# Short flags
+ezbun -d ./scripts -e js,ts --watch
+`.trim()}
+          </CodeBlock>
+          <P>Available options:</P>
+          <ul className="col text-ink/70 ml-2 list-inside list-disc gap-2">
+            <li>
+              <Code>--dir, -d</Code> - Source directory (default: ./src)
+            </li>
+            <li>
+              <Code>--extensions, -e</Code> - Comma-separated extensions
+              (default: ts,tsx,js,jsx,cjs,mjs)
+            </li>
+            <li>
+              <Code>--watch</Code> - Run in watch mode
+            </li>
+          </ul>
+        </Container>
+
+        <Container>
           <H3>Watch Mode</H3>
           <P>
             You can run scripts in watch mode (hot reloading) by passing the{" "}
@@ -199,30 +242,6 @@ export default (() => {
           </P>
           <CodeBlock {...{ lang: "bash" }}>bun ezbun --watch</CodeBlock>
         </Container>
-      </Section>
-
-      <Section>
-        <H2>Configuration</H2>
-        <P>
-          Create an optional <Code>ezbun.config.ts</Code> file in your project
-          root to customize behavior:
-        </P>
-        <CodeBlock {...{ lang: "typescript", fileName: "ezbun.config.ts" }}>
-          {`
-import { defineConfig } from "ezbun";
-
-export default defineConfig({
-  /** Source directory to scan for scripts */
-  sourceDir: "./src", // default: "./src"
-
-  /** File extensions to include */
-  extensions: ["ts", "tsx", "js", "jsx"], // default: ["ts", "tsx", "js", "jsx", "cjs", "mjs"]
-
-  /** Whether to show a success message after loading env vars */
-  showSuccessMessage: false, // default: false
-});
-`.trim()}
-        </CodeBlock>
       </Section>
 
       <Section>
@@ -239,7 +258,8 @@ export default defineConfig({
           </P>
           <CodeBlock {...{ lang: "typescript", fileName: "env.schema.ts" }}>
             {`
-import { defineEnv, z } from "ezbun";
+import { defineEnv } from "ezbun";
+import { z } from "zod";
 
 export default defineEnv({
   DATABASE_URL: z.url().startsWith("postgres://"),

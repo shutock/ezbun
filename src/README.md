@@ -13,8 +13,10 @@ Make running Bun sandboxes easy. `ezbun` is a CLI tool that scans your project f
 ## Installation
 
 ```bash
-bun add -D ezbun
+bun add -D ezbun zod
 ```
+
+Note: `zod` is a peer dependency and must be installed separately.
 
 ## Usage
 
@@ -47,32 +49,35 @@ Then run:
 bun dev
 ```
 
-### Watch Mode
-
-You can run scripts in watch mode (hot reloading) by passing the `--watch` flag:
+### CLI Options
 
 ```bash
-bun ezbun --watch
+# Default usage - scans ./src for ts, tsx, js, jsx, cjs, mjs files
+ezbun
+
+# Custom directory
+ezbun --dir ./scripts
+
+# Custom file extensions
+ezbun --extensions js,ts
+
+# Combined options
+ezbun --dir ./src --extensions ts,tsx,js
+
+# Watch mode (hot reloading)
+ezbun --watch
+
+# Short flags
+ezbun -d ./scripts -e js,ts --watch
 ```
 
-## Configuration
+**Options:**
 
-Create an optional `ezbun.config.ts` file in your project root to customize behavior:
-
-```ts
-import { defineConfig } from "ezbun";
-
-export default defineConfig({
-  /** Source directory to scan for scripts */
-  sourceDir: "./src", // default: "./src"
-
-  /** File extensions to include */
-  extensions: ["ts", "tsx", "js", "jsx"], // default: ["ts", "tsx", "js", "jsx", "cjs", "mjs"]
-
-  /** Whether to show a success message after loading env vars */
-  showSuccessMessage: false, // default: false
-});
-```
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--dir` | `-d` | Source directory to scan for scripts | `./src` |
+| `--extensions` | `-e` | Comma-separated list of file extensions | `ts,tsx,js,jsx,cjs,mjs` |
+| `--watch` | - | Run in watch mode (hot reloading) | - |
 
 ## Environment Variables
 
@@ -81,7 +86,8 @@ export default defineConfig({
 1. Create an `env.schema.ts` file in your project root:
 
 ```ts
-import { defineEnv, z } from "ezbun";
+import { defineEnv } from "ezbun";
+import { z } from "zod";
 
 export default defineEnv({
   DATABASE_URL: z.url().startsWith("postgres://"),

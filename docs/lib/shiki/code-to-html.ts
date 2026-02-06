@@ -1,4 +1,4 @@
-import { createCssVariablesTheme, createHighlighter } from "shiki";
+import { codeToHtml as codeToHtmlShiki, createCssVariablesTheme } from "shiki";
 
 const theme = createCssVariablesTheme({
   name: "ezbun",
@@ -7,16 +7,7 @@ const theme = createCssVariablesTheme({
   fontStyle: true,
 });
 
-export const highlighter = await createHighlighter({
-  langs: ["typescript", "json", "bash"],
-  themes: [theme],
-});
-
 export const codeToHtml = async (
   code: string,
   { lang = "typescript" }: { lang?: string },
-) =>
-  highlighter.codeToHtml(code, {
-    lang,
-    theme: theme.name ?? "",
-  });
+) => codeToHtmlShiki(code, { lang, theme });

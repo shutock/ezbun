@@ -1,10 +1,7 @@
 import type { ZodObject, ZodRawShape } from "zod";
 import { z } from "zod/mini";
 
-import { loadConfig } from "./config";
-import { bold, green, icon, red } from "./console";
-
-export { z };
+import { bold, icon, red } from "./console";
 
 export const defineEnv = <T extends ZodRawShape>(schema: T) => z.object(schema);
 
@@ -38,13 +35,6 @@ export const validateEnv = async () => {
   }
 
   await generateEnvDts();
-
-  const { showSuccessMessage } = await loadConfig();
-  if (!showSuccessMessage) return;
-
-  return console.info(
-    `${green(icon.check)} ${bold("Environment variables loaded successfully")}\n`,
-  );
 };
 
 const generateEnvDts = async () => {

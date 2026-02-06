@@ -1,19 +1,61 @@
 #!/usr/bin/env bun
 import prompts from "prompts";
 
-import { loadConfig } from "./utils/config";
-
-export const run = async () => {
-  const config = await loadConfig();
-
+const parseArgs = () => {
   const args = process.argv.slice(2);
+
+  let dir = "./src";
+  let extensions: string[] = ["ts", "tsx", "js", "jsx", "cjs", "mjs"];
   const isWatch = args.includes("--watch");
 
-  const extPattern = `*.{${config.extensions.join(",")}}`;
+  const dirIndex = args.findIndex((arg) => arg === "--dir" || arg === "-d");
+  if (dirIndex !== -1) {
+    const dirValue = args[dirIndex + 1];
+    if (dirValue !== undefined) {
+      dir = dirValue;
+    }
+  }
+
+  const extIndex = args.findIndex(
+    (arg) => arg === "--extensions" || arg === "-e",
+  );
+  if (extIndex !== -1) {
+    const extValue = args[extIndex + 1];
+    if (extValue !== undefined) {
+      extensions = extValue.split(",").map((ext) => ext.trim());
+    }
+  }
+
+  const passThroughArgs = args.filter((arg) => {
+    if (arg === "--watch") return false;
+    if (arg === "--dir" || arg === "-d") return false;
+    if (arg === "--extensions" || arg === "-e") return false;
+    const prevIndex = args.indexOf(arg) - 1;
+    if (prevIndex >= 0) {
+      const prev = args[prevIndex];
+      if (
+        prev === "--dir" ||
+        prev === "-d" ||
+        prev === "--extensions" ||
+        prev === "-e"
+      ) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  return { dir, extensions, isWatch, passThroughArgs };
+};
+
+export const run = async () => {
+  const { dir, extensions, isWatch, passThroughArgs } = parseArgs();
+
+  const extPattern = `*.{${extensions.join(",")}}`;
   const glob = new Bun.Glob(extPattern);
   const scripts: string[] = [];
 
-  const absoluteSourceDir = `${process.cwd()}/${config.sourceDir}`;
+  const absoluteSourceDir = `${process.cwd()}/${dir}`;
 
   try {
     const exitCode = await Bun.spawn(["test", "-d", absoluteSourceDir]).exited;
@@ -22,7 +64,7 @@ export const run = async () => {
         scripts.push(file);
       }
     } else {
-      console.error(`Source directory ${config.sourceDir} does not exist.`);
+      console.error(`Source directory ${dir} does not exist.`);
       process.exit(1);
     }
   } catch (e) {
@@ -31,7 +73,7 @@ export const run = async () => {
   }
 
   if (scripts.length === 0) {
-    console.error(`No scripts found in ${config.sourceDir}/ directory.`);
+    console.error(`No scripts found in ${dir}/ directory.`);
     process.exit(1);
   }
 
@@ -68,7 +110,7 @@ export const run = async () => {
     "--preload",
     preloadPath,
     `${absoluteSourceDir}/${selectedScript}`,
-    ...args.filter((arg) => arg !== "--watch"),
+    ...passThroughArgs,
   ];
 
   console.log(
